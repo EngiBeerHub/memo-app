@@ -1,9 +1,18 @@
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, TextStyle, View} from "react-native";
 
-const Hello = () => {
+interface Props {
+    children: string;
+    bang?: boolean;
+    style: TextStyle;
+}
+
+export const Hello = (props: Props) => {
+    const {children, bang, style} = props;
     return (
         <View>
-            <Text style={styles.text}>Hello</Text>
+            <Text style={[styles.text, style]}>
+                Hello {children}{bang ? '!' : null}
+            </Text>
         </View>
     );
 };
@@ -16,6 +25,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         padding: 16
     }
-})
-
-export default Hello;
+});
