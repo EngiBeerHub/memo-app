@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import MemoListItem from "../../components/MemoListItem";
 import CircleButton from "../../components/CircleButton";
 
-const Index = () => {
+const List = () => {
   return (
     <View style={styles.container}>
       {/*header*/}
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Index;
+export default List;
