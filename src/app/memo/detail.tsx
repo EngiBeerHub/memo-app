@@ -1,6 +1,7 @@
 import {ScrollView, StyleSheet, Text, View} from "react-native";
 import Header from "../../components/Header";
 import CircleButton from "../../components/CircleButton";
+import {Feather} from "@expo/vector-icons";
 
 const Detail = () => {
   return (
@@ -17,7 +18,9 @@ const Detail = () => {
           本文用なので使い方を間違えると不自然に見えることもありますので要注意。
         </Text>
       </ScrollView>
-      <CircleButton style={{top: 160, bottom: 'auto'}}>+</CircleButton>
+      <CircleButton style={{top: 160, bottom: 'auto'}}>
+        <Feather name={'plus'} size={40} />
+      </CircleButton>
     </View>
   );
 };
