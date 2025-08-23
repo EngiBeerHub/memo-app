@@ -2,7 +2,7 @@ import {StyleSheet, View} from "react-native";
 import Header from "../../components/Header";
 import MemoListItem from "../../components/MemoListItem";
 import CircleButton from "../../components/CircleButton";
-import {Feather} from "@expo/vector-icons";
+import Icon from "../../components/icon";
 
 const List = () => {
   return (
@@ -20,7 +20,7 @@ const List = () => {
 
       {/*FAB*/}
       <CircleButton>
-        <Feather name={'plus'} size={40}/>
+        <Icon/>
       </CircleButton>
     </View>
   );
