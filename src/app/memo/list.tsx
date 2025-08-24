@@ -3,16 +3,18 @@ import MemoListItem from "../../components/MemoListItem";
 import CircleButton from "../../components/CircleButton";
 import Icon from "../../components/icon";
 import {router, useNavigation} from "expo-router";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import LogOutButton from "../../components/LogOutButton";
 import {collection, onSnapshot, query, orderBy} from "firebase/firestore";
 import {auth, db} from "../../config";
+import {Memo} from "../../../types/memo";
 
 const handlePress = (): void => {
   router.push('/memo/create');
 };
 
 const List = () => {
+  const [memos, setMemos] = useState<Memo[]>([]);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -26,7 +28,17 @@ const List = () => {
     const ref = collection(db, `users/${auth.currentUser.uid}/memos`);
     const q = query(ref, orderBy('updatedAt', 'desc'));
     const unsubscribe = onSnapshot(q, snapshot => {
-      snapshot.forEach(doc => console.log(doc.data()));
+      const remoteMemos: Memo[] = [];
+      snapshot.forEach(doc => {
+        console.log(doc.data());
+        const {bodyText, updatedAt} = doc.data();
+        remoteMemos.push({
+          id: doc.id,
+          bodyText,
+          updatedAt
+        });
+      });
+      setMemos(remoteMemos);
     });
     return unsubscribe;
   }, []);
@@ -36,9 +48,7 @@ const List = () => {
       {/*list*/}
       <View>
         {/*item*/}
-        <MemoListItem/>
-        <MemoListItem/>
-        <MemoListItem/>
+        {memos.map(memo => <MemoListItem memo={memo}/>)}
       </View>
 
       {/*FAB*/}
