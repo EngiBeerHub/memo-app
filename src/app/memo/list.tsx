@@ -3,9 +3,9 @@ import MemoListItem from "../../components/MemoListItem";
 import CircleButton from "../../components/CircleButton";
 import Icon from "../../components/icon";
 import {router, useNavigation} from "expo-router";
-import {memo, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import LogOutButton from "../../components/LogOutButton";
-import {collection, onSnapshot, query, orderBy} from "firebase/firestore";
+import {collection, onSnapshot, orderBy, query} from "firebase/firestore";
 import {auth, db} from "../../config";
 import {Memo} from "../../../types/memo";
 
