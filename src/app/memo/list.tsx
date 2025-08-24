@@ -1,9 +1,9 @@
-import {StyleSheet, View} from "react-native";
+import {FlatList, StyleSheet, View} from "react-native";
 import MemoListItem from "../../components/MemoListItem";
 import CircleButton from "../../components/CircleButton";
 import Icon from "../../components/icon";
 import {router, useNavigation} from "expo-router";
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import LogOutButton from "../../components/LogOutButton";
 import {collection, onSnapshot, query, orderBy} from "firebase/firestore";
 import {auth, db} from "../../config";
@@ -46,10 +46,7 @@ const List = () => {
   return (
     <View style={styles.container}>
       {/*list*/}
-      <View>
-        {/*item*/}
-        {memos.map(memo => <MemoListItem memo={memo}/>)}
-      </View>
+      <FlatList data={memos} renderItem={({item}) => <MemoListItem memo={item}/>}/>
 
       {/*FAB*/}
       <CircleButton onPress={handlePress}>
