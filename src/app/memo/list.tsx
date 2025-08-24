@@ -30,7 +30,6 @@ const List = () => {
     const unsubscribe = onSnapshot(q, snapshot => {
       const remoteMemos: Memo[] = [];
       snapshot.forEach(doc => {
-        console.log(doc.data());
         const {bodyText, updatedAt} = doc.data();
         remoteMemos.push({
           id: doc.id,

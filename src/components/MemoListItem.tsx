@@ -14,7 +14,9 @@ const MemoListItem = (props: Props) => {
   const dateString = updatedAt.toDate().toLocaleString('ja-JP');
 
   return (
-    <Link href={'/memo/detail'} asChild>
+    <Link
+      href={{pathname: 'memo/detail', params: {id: memo.id}}}
+      asChild>
       <TouchableOpacity style={styles.memoListItem}>
         <View>
           <Text numberOfLines={1} style={styles.memoListItemTitle}>{bodyText}</Text>
@@ -22,7 +24,7 @@ const MemoListItem = (props: Props) => {
         </View>
         <TouchableOpacity>
           <Icon name={'delete'} size={32} color={'#B0B0B0'}/>
-        </TouchableOpacity>
+        </TouchableOpacity>;
       </TouchableOpacity>
     </Link>
   );
