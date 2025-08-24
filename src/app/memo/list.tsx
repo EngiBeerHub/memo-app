@@ -5,6 +5,8 @@ import Icon from "../../components/icon";
 import {router, useNavigation} from "expo-router";
 import {useEffect} from "react";
 import LogOutButton from "../../components/LogOutButton";
+import {collection, onSnapshot, query, orderBy} from "firebase/firestore";
+import {auth, db} from "../../config";
 
 const handlePress = (): void => {
   router.push('/memo/create');
@@ -17,6 +19,16 @@ const List = () => {
     navigation.setOptions({
       headerRight: () => <LogOutButton/>
     });
+  }, []);
+
+  useEffect(() => {
+    if (auth.currentUser == null) return;
+    const ref = collection(db, `users/${auth.currentUser.uid}/memos`);
+    const q = query(ref, orderBy('updatedAt', 'desc'));
+    const unsubscribe = onSnapshot(q, snapshot => {
+      snapshot.forEach(doc => console.log(doc.data()));
+    });
+    return unsubscribe;
   }, []);
 
   return (
