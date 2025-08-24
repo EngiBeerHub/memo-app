@@ -7,12 +7,12 @@ import {type Memo} from "../../../types/memo";
 import {auth, db} from "../../config";
 import {onSnapshot, doc} from "firebase/firestore";
 
-const handlePress = (): void => {
-  router.push('memo/edit');
+const handlePress = (id: string): void => {
+  router.push({pathname: 'memo/edit', params: {id}});
 };
 
 const Detail = () => {
-  const {id} = useLocalSearchParams();
+  const id = String(useLocalSearchParams().id);
   console.log(id);
 
   const [memo, setMemo] = useState<Memo | null>(null);
@@ -39,7 +39,7 @@ const Detail = () => {
       <ScrollView style={styles.memoBody}>
         <Text style={styles.memoBodyText}>{memo?.bodyText}</Text>
       </ScrollView>
-      <CircleButton onPress={handlePress} style={{top: 60, bottom: 'auto'}}>
+      <CircleButton onPress={() => handlePress(id)} style={{top: 60, bottom: 'auto'}}>
         <Icon name={'pencil'} size={40} color={'#ffffff'}/>
       </CircleButton>
     </View>
