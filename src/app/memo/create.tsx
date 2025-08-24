@@ -1,10 +1,11 @@
-import {KeyboardAvoidingView, StyleSheet, TextInput, View} from "react-native";
+import {StyleSheet, TextInput, View} from "react-native";
 import CircleButton from "../../components/CircleButton";
 import Icon from "../../components/icon";
 import {router} from "expo-router";
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
 import {auth, db} from "../../config";
 import {useState} from "react";
+import KeyboardAvoidingView from "../../components/KeyboardAvoidingView";
 
 const handlePress = async (bodyText: string) => {
   if (auth.currentUser === null) return;
@@ -23,12 +24,13 @@ const handlePress = async (bodyText: string) => {
 const Create = () => {
   const [bodyText, setBodyText] = useState('');
   return (
-    <KeyboardAvoidingView behavior={'height'} style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
           multiline
           style={styles.input}
           value={bodyText}
+          autoFocus
           onChangeText={text => setBodyText(text)}
         />
       </View>
